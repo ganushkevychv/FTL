@@ -1,15 +1,27 @@
 import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, {useState} from 'react';
+import { StyleSheet, Text, View, TextInput } from 'react-native';
+import { AirportProvider } from './context/AirportsContext';
+const App = () => {
 
-export default function App() {
+const [text, setText] = useState('');
+
   return (
-    <View style={styles.container}>
-      <Text>Open up App.tsx to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+    
+<View>
+<AirportProvider>
+  <TextInput onChangeText={text => setText(text)} defaultValue={text} placeholder="search"/>
+  <Text>
+    {
+      text.split(' ').map((word)=> word &&'result').join(' ')
+    }
+  </Text>
+  </AirportProvider>
+</View>
+
+  )
 }
+export default App;
 
 const styles = StyleSheet.create({
   container: {
